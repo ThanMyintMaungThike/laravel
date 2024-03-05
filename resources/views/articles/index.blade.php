@@ -15,7 +15,7 @@
     </ul>
 
     @endforeach
-    {{-- <h1>Article One</h1>
-    <h3>Article Two</h3> --}}
+    <h1>Article One</h1>
+    <h3>Article Two</h3>
 </body>
 </html>
