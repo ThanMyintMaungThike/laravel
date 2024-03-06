@@ -15,9 +15,9 @@ use App\Http\Controllers\Articles\ArticleController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 // static route
 // Route::get('/users', function () {
