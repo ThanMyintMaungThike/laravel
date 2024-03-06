@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Articles\ArticleController;
+use App\Http\Controllers\Categories\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,8 @@ Route::get('/', function () {
 // });
 
 Route::get('/articles', [ArticleController::class, 'index']);
+Route::get('/categories', [CategoryController::class, 'index']);
+
+// Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

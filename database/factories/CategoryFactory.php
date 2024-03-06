@@ -18,6 +18,8 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'description' => fake()->sentence(),
+            'status' => fake()->boolean(),
         ];
     }
 }

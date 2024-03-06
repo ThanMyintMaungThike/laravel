@@ -9,7 +9,7 @@ class ArticleController extends Controller
 {
     public function index() {
         // return view('articles.index');
-        $articles = [ 
+        $articles = [
             ['id' => 1, 'name' => 'Article 1'],
             ['id' => 2, 'name' => 'Article 2'],
         ];
