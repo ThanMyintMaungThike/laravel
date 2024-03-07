@@ -10,6 +10,8 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Category</h1>
+    <a href="{{route('categories.create')}}">New Create</a>
     {{-- @dd($categories); --}}
     {{-- @dd($category); --}}
     <table class="table">
@@ -19,6 +21,7 @@
             <th scope="col">Name</th>
             <th scope="col">Description</th>
             <th scope="col">Status</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -28,6 +31,9 @@
             <td>{{ $category->name }}</td>
             <td>{{ $category->description }}</td>
             <td>{{ $category->status}}</td>
+            <td>
+                <a href="{{route('categories.edit', $category->id)}}">Edit</a>
+            </td>
           </tr>
           @endforeach
         </tbody>
