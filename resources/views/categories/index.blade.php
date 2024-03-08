@@ -33,6 +33,10 @@
             <td>{{ $category->status}}</td>
             <td>
                 <a href="{{route('categories.edit', $category->id)}}">Edit</a>
+                <form action="{{route('categories.delete', $category->id)}}" method="POST">
+                    @csrf
+                    <button value="submit">Delete</button>
+                </form>
             </td>
           </tr>
           @endforeach

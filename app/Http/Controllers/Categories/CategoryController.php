@@ -53,4 +53,9 @@ class CategoryController extends Controller {
         // ]);
         return redirect()->route('categories.index');
     }
+    public function delete($id) {
+        Category::where('id', $id)->delete();
+        // DB::table('categories')->where('id', $id)->delete();
+        return redirect()->route('categories.index');
+    }
 }
