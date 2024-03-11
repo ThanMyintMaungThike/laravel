@@ -21,7 +21,8 @@
             <th scope="col">Name</th>
             <th scope="col">Description</th>
             <th scope="col">Status</th>
-            <th scope="col">Action</th>
+            <th colspan="2" class="text-center">Action</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -32,10 +33,12 @@
             <td>{{ $category->description }}</td>
             <td>{{ $category->status}}</td>
             <td>
-                <a href="{{route('categories.edit', $category->id)}}">Edit</a>
+                <a class="btn btn-info" href="{{route('categories.edit', $category->id)}}">Edit</a>
+            </td>
+            <td>
                 <form action="{{route('categories.delete', $category->id)}}" method="POST">
                     @csrf
-                    <button value="submit">Delete</button>
+                    <button class="btn btn-primary" value="submit">Delete</button>
                 </form>
             </td>
           </tr>
