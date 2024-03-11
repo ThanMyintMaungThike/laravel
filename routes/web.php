@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Article\ArticleController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Articles\ArticleController;
+
 use App\Http\Controllers\Categories\CategoryController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +31,6 @@ Route::get('/', function () {
 //     return "This is user $id.";
 // });
 
-Route::get('/articles', [ArticleController::class, 'index']);
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
@@ -38,6 +39,7 @@ Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('
 Route::post('/categories/{id}/update', [CategoryController::class, 'update'])->name('categories.update');
 Route::post('/categories/{id}/delete', [CategoryController::class, 'delete'])->name('categories.delete');
 
-// Auth::routes();
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('articles', ArticleController::class);

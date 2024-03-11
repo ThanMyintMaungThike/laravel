@@ -18,6 +18,11 @@ class CategoryController extends Controller {
     }
     public function store(Request $request) {
         // dd($request->all());
+        $request->validate([
+            'name' => ['required', 'string'],
+            'description' => ['required','string'],
+         'status' => ['boolean'],
+        ]);
         Category::create([
             'name' => $request->name,
             'description' => $request->description,
