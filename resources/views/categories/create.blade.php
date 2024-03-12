@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section("content")
-<form class='container' action="{{route('categories.store')}}" method="POST">
+<form class='container' action="{{route('categories.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
     @if($errors->any())
         <div class="alert alert-danger">
@@ -24,6 +24,12 @@
         {{-- @if($errors->first('description'))
         <span class="form-text text-muted" style="color: red;">{{$errors->first('description')}}</span>
         @endif --}}
+    </div>
+    <div class="form-group mb-3">
+        <label for="">Select Image</label>
+        <input type="file" name="image">
+    <div>
+
     </div>
     <div class="form-group mb-3">
         <label for="">Status</label>
