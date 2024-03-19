@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\Categories\CategoryController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\Role\RoleController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -43,3 +46,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('articles', ArticleController::class);
+Route::resource('users', UserController::class)->middleware('auth');
+Route::resource('roles', RoleController::class)->middleware('auth');
+Route::resource('permissions', PermissionController::class)->middleware('auth');
