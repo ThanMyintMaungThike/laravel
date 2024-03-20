@@ -28,7 +28,7 @@
                             <td>{{$category->description}}</td>
                             <td>
                                 {{-- @dd($category->img); --}}
-                                <img src="{{asset('uploadedImages/'.$category->img)}}" alt="" width="100px">
+                                <img src="{{asset('uploadedImages/'.$category->img)}}" alt="" width="500px">
                             </td>
                             <td>{{$category->status}}</td>
                             <td>
