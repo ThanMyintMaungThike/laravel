@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\Categories\CategoryController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\User\UserController;
@@ -26,13 +27,13 @@ Route::get('/', function () {
 });
 
 // static route
-// Route::get('/users', function () {
-//     return "These are the users.";
-// });
+Route::get('/users', function () {
+    return "These are the users.";
+})->name('user.index');
 // Dynamic route
-// Route::get('/users/{id}', function ($id) {
-//     return "This is user $id.";
-// });
+Route::get('/users/{id}', function ($id) {
+    return "This is user $id.";
+});
 
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
@@ -49,3 +50,6 @@ Route::resource('articles', ArticleController::class);
 Route::resource('users', UserController::class)->middleware('auth');
 Route::resource('roles', RoleController::class)->middleware('auth');
 Route::resource('permissions', PermissionController::class)->middleware('auth');
+
+Route::get('/employee',[EmployeeController::class, 'index'])->name('employee.index');
+Route::get('/employee/{id}',[EmployeeController::class, 'show'])->name('employee.show');

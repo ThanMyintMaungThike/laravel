@@ -13,7 +13,7 @@ class CategoryService {
     public function index() {
         return $this->categoryRepository->index();
     }
-    public function store($params) {
+    public function store( $params) {
 
         $imageName = time().'.'.$params['image']->getClientOriginalExtension();
         // dd($imageName);
@@ -22,4 +22,14 @@ class CategoryService {
 
         return $this->categoryRepository->store($params);
     }
+
+    public function findById($id) {
+        return $this->categoryRepository->findById($id);
+    }
+
+    public function update( $request, $id) {
+        // dd($request->all());
+        $this->categoryRepository->update($request->all(), $id);
+    }
+
 }

@@ -6,8 +6,10 @@
             <h6 class="m-0 font-weight-bold text-primary">Category List</h6>
             <a href="{{route('categories.create')}}">New Category</a>
         </div>
+        {{ $categories->onEachSide(5)->links() }}
         <div class="card-body">
             <div class="table-responsive">
+                <input type="datetime-local">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
@@ -21,6 +23,7 @@
                     </thead>
 
                     <tbody>
+
                         @foreach ($categories as $category)
                         <tr>
                             <td>{{$category->id}}</td>
@@ -28,7 +31,7 @@
                             <td>{{$category->description}}</td>
                             <td>
                                 {{-- @dd($category->img); --}}
-                                <img src="{{asset('uploadedImages/'.$category->img)}}" alt="" width="500px">
+                                <img src="{{asset('uploadedImages/'.$category->img)}}" alt="" width="250px">
                             </td>
                             <td>{{$category->status}}</td>
                             <td>

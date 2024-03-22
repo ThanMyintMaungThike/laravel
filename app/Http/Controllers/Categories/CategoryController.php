@@ -66,8 +66,8 @@ class CategoryController extends Controller {
         if(!Gate::allows('category_edit')){
             return abort(401);
         }
-        $category = Category::find($id);
-        $category = Category::where('id', $id)->first();
+        $category = $this->categoryService->findById($id);
+
         // dd($category);
         return view('categories.edit', compact('category'));
     }
@@ -77,13 +77,10 @@ class CategoryController extends Controller {
             return abort(401);
         }
 
-        $category = Category::find($id);
+        $this->categoryService->update($request, $id);
+
         // dd($category);
-        $category->update([
-            'name' => $request->name,
-            'description' => $request->description,
-          'status' => $request->status
-        ]);
+
 
         // DB::table('categories')->where('id', $id)->update([
         //     'name' => $request->name,

@@ -2,20 +2,40 @@
 namespace App\Http\Repositories\Category;
 
 use App\Models\Category;
+use Exception;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class CategoryRepository implements CategoryRepositoryInterface {
-    public function index(): Collection {
+    public function index() {
+                // Category::whereBetween('created_at',[$request->start_date . '00:00:00',$request->end_date . '23:59:59'])->paginate(1);
         // return Category::with('categoryImages')->get()->toBase();
-        return Category::all();
+        return Category::latest()->paginate(3);
     }
     public function store(array $params) {
         // return Category::create($params);
-        Category::create([
+        $category = Category::create([
             'name' => $params['name'],
             'description' => $params['description'],
             'img' => $params['image'],
-            'status' => $params['status'],
+           'status' => $params['status'],
+        ]);
+        return $category;
+    }
+    public function findById($id): Category
+    {
+        $category = Category::find($id);
+        // $category = Category::where('id', $id)->first();
+
+        return $category;
+    }
+    public function update($request, $id) {
+        $category = Category::find($id);
+        $category->update([
+            'name' => $request['name'],
+            'description' => $request['description'],
+          'status' => $request['status']
         ]);
     }
+
 }
