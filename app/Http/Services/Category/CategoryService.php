@@ -27,9 +27,11 @@ class CategoryService {
         return $this->categoryRepository->findById($id);
     }
 
-    public function update( $request, $id) {
+    public function update($request, $id) {
         // dd($request->all());
         $this->categoryRepository->update($request->all(), $id);
     }
-
+    public function delete($id) {
+        $this->categoryRepository->delete($id);
+    }
 }

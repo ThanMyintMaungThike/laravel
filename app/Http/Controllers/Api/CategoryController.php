@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CategoryRequest;
 use App\Http\Services\Category\CategoryService;
+use App\Http\Controller\BaseApiController;
+use App\Http\Controllers\BaseApiController as ControllersBaseApiController;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CategoryController extends ControllersBaseApiController
 {
     private $categoryService;
 
@@ -19,12 +22,7 @@ class CategoryController extends Controller
     public function index()
     {
         $category = $this->categoryService->index();
-
-        return response()->json([
-            'status' => 200,
-            'message' => 'Categoy List',
-            'data' => $category
-        ]);
+        return $this->success($category, 'category_list', 200);
     }
 
     public function store(Request $request)
@@ -32,37 +30,41 @@ class CategoryController extends Controller
         // dd($request);
         $category = $this->categoryService->store($request->all());
 
-        return response()->json([
-            'status' => 201,
-            'message' => 'Category Create',
-            'data' => $category
-        ]);
+        return $this->success($category, null, 201);
+
     }
     public function edit($id) {
         $category = $this->categoryService->findById($id);
 
-        return response()->json([
-           'status' => 200,
-           'message' => 'Category Edit',
-            'data' => $category
-        ]);
+        return $this->success($category, 'Category_Edit', 200);
+
     }
-    public function update($request, $id) {
-        $category = $this->categoryService->update($request->all(), $id);
-
-        return response()->json([
-          'status' => 200,
-          'message' => 'Category Update',
-            'data' => $category
+    public function update($id) {
+        // $category = $this->categoryService->update($id);
+        $validator = validator(request()->all(),[
+            "name" => "required",
+            "description" => "required",
+            "img" => "required",
+            "status" => "required"
         ]);
+        // $category->img = $this->categoryService
+        $category = Category::find($id);
+        $category->name = request()->name;
+        $category->description = request()->description;
+        $category->img = request()->image;
+        $imageName = time().'.'.$category->img->getClientOriginalExtension();
+        // dd($imageName);
+        $category->img->move(public_path('/uploadedimages'), $imageName);
+        $category->img = $imageName;
+        $category->status = request()->status;
+        $category->save();
+
+        return $this->success($category, "Category Updated Successfully", 200);
     }
-    // public function destroy($id) {
-    //     $category = $this->categoryService->destroy($id);
+    public function delete($id) {
+        $this->categoryService->delete($id);
 
-    //     return response()->json([
+        return $this->success('', "Category Deleted Successfully", 200);
 
-    //        'status' => 200,
-    //       'message' => 'Category Delete',
-    //     ])
-    // }
+    }
 }

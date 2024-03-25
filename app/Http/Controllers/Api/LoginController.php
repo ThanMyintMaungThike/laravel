@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers\Api;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,8 +13,9 @@ class LoginController extends Controller
 
         if(Auth::attempt($credentials))
         {
+            // dd('here');
             $user = Auth::user();
-            dd($user);
+            // dd($user);
             return response()->json([
                 'status' => 200 ,
                 'message' => 'Login Success',

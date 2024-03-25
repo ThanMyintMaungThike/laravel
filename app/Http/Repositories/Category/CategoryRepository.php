@@ -30,12 +30,19 @@ class CategoryRepository implements CategoryRepositoryInterface {
         return $category;
     }
     public function update($request, $id) {
+        // dd($request);
         $category = Category::find($id);
+
         $category->update([
-            'name' => $request['name'],
+            "name" => $request["name"],
             'description' => $request['description'],
-          'status' => $request['status']
+            'img'   => $request['image'],
+          'status' => $request['status'],
         ]);
     }
-
+    public function delete($id) {
+        Category::find($id)->delete();
+        // Category::where('id', $category)->delete();
+        // return redirect()->route('categories.index');
+    }
 }

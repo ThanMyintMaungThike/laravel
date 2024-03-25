@@ -1,6 +1,21 @@
 @extends('layouts.master')
 @section('content')
 <div class="container-fluid">
+    @if(isset($_GET['success']))
+    <div class="alert alert-info" role="alert">
+        Category created successfully!
+    </div>
+    @endif
+    @if(isset($_GET['success=edit']))
+    <div class="alert alert-info" role="alert">
+        Category updated successfully!
+    </div>
+    @endif
+    @if(isset($_GET['delete']))
+    <div class="alert alert-info" role="alert">
+        Category deleted!
+    </div>
+    @endif
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Category List</h6>

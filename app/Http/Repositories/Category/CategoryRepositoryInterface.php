@@ -10,4 +10,5 @@ interface CategoryRepositoryInterface {
     public function store(array $params);
     public function findById($id): Category;
     public function update($request, $id);
+    public function delete($id);
 }

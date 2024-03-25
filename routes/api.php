@@ -21,8 +21,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('login',[LoginController::class,'login']);
-Route::get('category',[CategoryController::class,'index']);
-Route::post('category/store',[CategoryController::class,'store']);
-Route::get('category/edit',[CategoryController::class,'edit']);
-Route::get('category/update',[CategoryController::class,'update']);
+Route::group(["middleware"=>['auth:sanctum']],function() {
+    Route::get('category',[CategoryController::class,'index']);
+    Route::post('category/store',[CategoryController::class,'store']);
+    Route::get('category/{id}/edit',[CategoryController::class,'edit']);
+    Route::post('category/{id}/update',[CategoryController::class,'update']);
+    Route::get('category/{id}/delete',[CategoryController::class,'delete']);
+});
+
 
