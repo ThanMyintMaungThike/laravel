@@ -59,15 +59,15 @@ class CategoryController extends Controller {
         //     'status' => $request->status
         // ]);
 
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index','success');
     }
     public function edit($id) {
         // dd($id);
         if(!Gate::allows('category_edit')){
             return abort(401);
         }
-        $category = Category::find($id);
-        $category = Category::where('id', $id)->first();
+        $category = $this->categoryService->findById($id);
+
         // dd($category);
         return view('categories.edit', compact('category'));
     }
@@ -76,30 +76,28 @@ class CategoryController extends Controller {
         if(!Gate::allows('category_edit')){
             return abort(401);
         }
+        // dd($request);
+        $this->categoryService->update($request, $id);
 
-        $category = Category::find($id);
         // dd($category);
-        $category->update([
-            'name' => $request->name,
-            'description' => $request->description,
-          'status' => $request->status
-        ]);
+
 
         // DB::table('categories')->where('id', $id)->update([
         //     'name' => $request->name,
         //     'description' => $request->description,
         //   'status' => $request->status
         // ]);
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index', 'success= edit');
     }
     public function delete($id) {
 
         if(!Gate::allows('category_delete')){
             return abort(401);
         }
-
-        Category::where('id', $id)->delete();
+        $this->categoryService->delete($id);
+        // Category::where('id', $id)->delete();
+        // Category::find($id)->delete();
         // DB::table('categories')->where('id', $id)->delete();
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index','delete');
     }
 }
